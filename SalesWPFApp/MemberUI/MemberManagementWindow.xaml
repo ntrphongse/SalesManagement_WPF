@@ -1,0 +1,89 @@
+﻿<Window x:Class="SalesWPFApp.MemberUI.MemberManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalesWPFApp.MemberUI"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="Member Management" ResizeMode="NoResize"
+        Width="638" Height="564">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel Height="22" VerticalAlignment="Top">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Management">
+                    <MenuItem Header="Product Management" Name="menuProduct" Click="menuProduct_Click" />
+                    <MenuItem Header="Order Management" Name="menuOrder" Click="menuOrder_Click" />
+                    <Separator />
+                    <MenuItem Header="Exit" Name="menuExit" Click="menuExit_Click"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Label Content="Member ID" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="txtMemberId" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="118,30,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="26" IsReadOnly="True"
+                 Text="{Binding Path=MemberId, Mode=OneWay}"
+                 DataContext="{Binding ElementName=listMembers, Path=SelectedItem}"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEmail" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="118,67,0,0" 
+            TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="26" IsReadOnly="True"
+                 Text="{Binding Path=Email, Mode=OneWay}"
+                 DataContext="{Binding ElementName=listMembers, Path=SelectedItem}"/>
+
+        <Label Content="Company Name" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCompany" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="118,104,0,0" 
+            TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="26" IsReadOnly="True"
+                 Text="{Binding Path=CompanyName, Mode=OneWay}"
+                 DataContext="{Binding ElementName=listMembers, Path=SelectedItem}"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="324,30,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPassword" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="432,30,0,0" 
+             VerticalAlignment="Top" Width="184" Height="26" IsReadOnly="True"
+                 Text="{Binding Path=Password, Mode=OneWay}"
+                 DataContext="{Binding ElementName=listMembers, Path=SelectedItem}"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="327,67,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCity" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="432,67,0,0" 
+            TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="26" IsReadOnly="True"
+                 Text="{Binding Path=City, Mode=OneWay}"
+                 DataContext="{Binding ElementName=listMembers, Path=SelectedItem}"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="324,104,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCountry" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="432,104,0,0" 
+            TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="26" IsReadOnly="True"
+                 Text="{Binding Path=Country, Mode=OneWay}"
+                 DataContext="{Binding ElementName=listMembers, Path=SelectedItem}"/>
+        <Button Content="Load" Name="btnLoad" Click="btnLoad_Click" HorizontalAlignment="Left" Margin="58,161,0,0" VerticalAlignment="Top" Width="118" Height="25"/>
+        <Button Content="New" x:Name="btnNew" Click="btnNew_Click" HorizontalAlignment="Center" Margin="0,161,0,0" VerticalAlignment="Top" Width="118" Height="25"/>
+        <Button Content="Delete" x:Name="btnDelete" Click="btnDelete_Click" HorizontalAlignment="Left" Margin="465,161,0,0" VerticalAlignment="Top" Width="118" Height="25"/>
+        <ListView Name="listMembers" HorizontalAlignment="Left" Height="267" 
+                  Margin="10,20,0,0" VerticalAlignment="Top" Width="606" Grid.Row="1" 
+                  >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <EventSetter Event="MouseDoubleClick" Handler="listMembers_MouseDoubleClick" />
+                </Style>
+
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Member ID" DisplayMemberBinding="{Binding MemberId}" Width="75" />
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="150"/>
+                    <GridViewColumn Header="Company Name" DisplayMemberBinding="{Binding CompanyName}" Width="100"/>
+                    <GridViewColumn Header="City" DisplayMemberBinding="{Binding City}" Width="100" />
+                    <GridViewColumn Header="Country" DisplayMemberBinding="{Binding Country}" Width="75" />
+                    <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <DockPanel Height="30" VerticalAlignment="Top" Margin="0,310,0,0" Grid.Row="2">
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock x:Name="lblStatus" />
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
+
+    </Grid>
+</Window>
